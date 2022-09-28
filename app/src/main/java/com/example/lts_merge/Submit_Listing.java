@@ -4,26 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
-/* import com.basgeekball.awesomevalidation.AwesomeValidation;
-import com.basgeekball.awesomevalidation.ValidationStyle;
-import com.basgeekball.awesomevalidation.utility.RegexTemplate; */
 
 import java.util.ArrayList;
 
 public class Submit_Listing extends AppCompatActivity {
 
-    Button button_submit;
-
+    Button bt_submit;
+    EditText ed_title, ed_owner, ed_email, ed_pass, ed_address, ed_pin, ed_mob, ed_phone;
 
 
     //============== Initialization for DropDown Spinner ===========================================
@@ -31,21 +25,30 @@ public class Submit_Listing extends AppCompatActivity {
 
     ArrayList<String> arrayList_parent, arrayList_city, arrayList_child;
     ArrayAdapter<String> arrayAdapter_parent, arrayAdapter_city, arrayAdapter_child;
-    ArrayList<String> arrayList_restaurants,arrayList_doctors,arrayList_real_estate,arrayList_travels,arrayList_repairs,arrayList_automobile, arrayList_services, arrayList_wedding, arrayList_care, arrayList_school, arrayList_electronics, arrayList_agri, arrayList_astro, arrayList_bcare, arrayList_sports, arrayList_fit, arrayList_dneeds, arrayList_courier, arrayList_civil, arrayList_chemist, arrayList_books, arrayList_hotels, arrayList_pest, arrayList_pack, arrayList_furniture,arrayList_caterers, arrayList_job;
+    ArrayList<String> arrayList_restaurants, arrayList_doctors, arrayList_real_estate, arrayList_travels, arrayList_repairs, arrayList_automobile, arrayList_services, arrayList_wedding, arrayList_care, arrayList_school, arrayList_electronics, arrayList_agri, arrayList_astro, arrayList_bcare, arrayList_sports, arrayList_fit, arrayList_dneeds, arrayList_courier, arrayList_civil, arrayList_chemist, arrayList_books, arrayList_hotels, arrayList_pest, arrayList_pack, arrayList_furniture, arrayList_caterers, arrayList_job;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_listing);
+        //=============== Initialisation of All Variables for Validation ==============================================
 
+        ed_title = (EditText) findViewById(R.id.editText_title);
+        ed_owner = (EditText) findViewById(R.id.editText_owner);
+        ed_email = (EditText) findViewById(R.id.editText_email);
+        ed_pass = (EditText) findViewById(R.id.editText_pass);
+        ed_address = (EditText) findViewById(R.id.editText_address);
+        ed_pin = (EditText) findViewById(R.id.editText_pin);
+        ed_mob = (EditText) findViewById(R.id.editText_mob);
+        ed_phone = (EditText) findViewById(R.id.editText_phone);
 
         //=============== Parent and Child Spinner Code i.e Category, Sub-Cat and City =================
-        sp_parent=(Spinner) findViewById(R.id.spinner_parent);
-        sp_child=(Spinner) findViewById(R.id.spinner_child);
-        sp_city=(Spinner) findViewById(R.id.spinner_city);
+        sp_parent = (Spinner) findViewById(R.id.spinner_parent);
+        sp_child = (Spinner) findViewById(R.id.spinner_child);
+        sp_city = (Spinner) findViewById(R.id.spinner_city);
 
-        arrayList_parent=new ArrayList<>();
+        arrayList_parent = new ArrayList<>();
         arrayList_parent.add("Restaurants");
         arrayList_parent.add("Doctors");
         arrayList_parent.add("Schools and Colleges");
@@ -74,12 +77,12 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_parent.add("Caterers");
 
 
-        arrayAdapter_parent=new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_spinner_item,arrayList_parent);
+        arrayAdapter_parent = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_parent);
         sp_parent.setAdapter(arrayAdapter_parent);
 
         //============= Child Spinner Process Starts ===================================================
 
-        arrayList_restaurants=new ArrayList<>();
+        arrayList_restaurants = new ArrayList<>();
         arrayList_restaurants.add("American Restaurants");
         arrayList_restaurants.add("Andhra Restaurants");
         arrayList_restaurants.add("Arabic Restaurants");
@@ -94,7 +97,7 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_restaurants.add("Maharashtrian Restaurants");
 
 
-        arrayList_doctors=new ArrayList<>();
+        arrayList_doctors = new ArrayList<>();
         arrayList_doctors.add("General Surgeon");
         arrayList_doctors.add("ENT Surgeon");
         arrayList_doctors.add("Hepatologist");
@@ -110,7 +113,7 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_doctors.add("Rheumatologist");
 
 
-        arrayList_school=new ArrayList<>();
+        arrayList_school = new ArrayList<>();
         arrayList_school.add("Science Collages");
         arrayList_school.add("Commerce Collages");
         arrayList_school.add("Dental Collages");
@@ -126,7 +129,7 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_school.add("Boarding Schools");
 
 
-        arrayList_electronics=new ArrayList<>();
+        arrayList_electronics = new ArrayList<>();
         arrayList_electronics.add("Dish TV Dealers");
         arrayList_electronics.add("Water Filters and Purifiers");
         arrayList_electronics.add("Inverter Dealers");
@@ -141,7 +144,7 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_electronics.add("Air Cooler Dealers");
 
 
-        arrayList_travels=new ArrayList<>();
+        arrayList_travels = new ArrayList<>();
         arrayList_travels.add("Air Ticketing Agents (Domestic)");
         arrayList_travels.add("Domestic Travel Agents");
         arrayList_travels.add("Domestic Tour Operators");
@@ -156,7 +159,7 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_travels.add("Taxi Services Intra City");
 
 
-        arrayList_repairs=new ArrayList<>();
+        arrayList_repairs = new ArrayList<>();
         arrayList_repairs.add("Car Mechanic");
         arrayList_repairs.add("AC Repair Services");
         arrayList_repairs.add("TV Repairs");
@@ -167,7 +170,7 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_repairs.add("Washing Machine Repair Services");
 
 
-        arrayList_automobile=new ArrayList<>();
+        arrayList_automobile = new ArrayList<>();
         arrayList_automobile.add("Automobile Dealers");
         arrayList_automobile.add("Driving Schools");
         arrayList_automobile.add("Car Accessory Dealers");
@@ -182,7 +185,7 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_automobile.add("Bicycle Dealers");
 
 
-        arrayList_real_estate=new ArrayList<>();
+        arrayList_real_estate = new ArrayList<>();
         arrayList_real_estate.add("Commercial Lands");
         arrayList_real_estate.add("Property Dealers");
         arrayList_real_estate.add("Residential Plots");
@@ -197,7 +200,7 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_real_estate.add("Real Estate Developers");
 
 
-        arrayList_wedding=new ArrayList<>();
+        arrayList_wedding = new ArrayList<>();
         arrayList_wedding.add("Photo Studios");
         arrayList_wedding.add("Wedding Card Printers");
         arrayList_wedding.add("Marriage Bureaus");
@@ -211,7 +214,7 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_wedding.add("5 Star Banquet Halls");
 
 
-        arrayList_care=new ArrayList<>();
+        arrayList_care = new ArrayList<>();
         arrayList_care.add("Beauty Parlours");
         arrayList_care.add("Bridal Makeup Artists");
         arrayList_care.add("Hair Stylists");
@@ -226,7 +229,7 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_care.add("Makeup Institute");
 
 
-        arrayList_job=new ArrayList<>();
+        arrayList_job = new ArrayList<>();
         arrayList_job.add("Placement Services for Civil Industry");
         arrayList_job.add("Placement Services for Computer Hardware");
         arrayList_job.add("Placement Services for Computer Operator");
@@ -240,10 +243,10 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_job.add("Placement Services for Pharma Industry");
 
 
-        arrayList_agri=new ArrayList<>();
+        arrayList_agri = new ArrayList<>();
 
 
-        arrayList_astro=new ArrayList<>();
+        arrayList_astro = new ArrayList<>();
         arrayList_astro.add("Numerologist");
         arrayList_astro.add("Astrology Computerised");
         arrayList_astro.add("Pandit for Pooja");
@@ -251,7 +254,7 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_astro.add("Astrology Training Center");
 
 
-        arrayList_bcare=new ArrayList<>();
+        arrayList_bcare = new ArrayList<>();
         arrayList_bcare.add("Baby Food");
         arrayList_bcare.add("Baby Sitters");
         arrayList_bcare.add("Baby Bath");
@@ -264,7 +267,7 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_bcare.add("Toys");
 
 
-        arrayList_sports=new ArrayList<>();
+        arrayList_sports = new ArrayList<>();
         arrayList_sports.add("Badminton");
         arrayList_sports.add("Cricket");
         arrayList_sports.add("Volleyball");
@@ -279,7 +282,7 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_sports.add("Archery");
 
 
-        arrayList_fit=new ArrayList<>();
+        arrayList_fit = new ArrayList<>();
         arrayList_fit.add("Health Clubs");
         arrayList_fit.add("Meditation Centers");
         arrayList_fit.add("Meditation Classes");
@@ -293,16 +296,16 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_fit.add("Reflexology Massage Centers");
 
 
-        arrayList_dneeds=new ArrayList<>();
+        arrayList_dneeds = new ArrayList<>();
 
 
-        arrayList_courier=new ArrayList<>();
+        arrayList_courier = new ArrayList<>();
 
 
-        arrayList_civil=new ArrayList<>();
+        arrayList_civil = new ArrayList<>();
 
 
-        arrayList_chemist=new ArrayList<>();
+        arrayList_chemist = new ArrayList<>();
         arrayList_chemist.add("Hospital");
         arrayList_chemist.add("Dentists");
         arrayList_chemist.add("Medical");
@@ -312,16 +315,16 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_chemist.add("Blood Banks");
 
 
-        arrayList_chemist=new ArrayList<>();
+        arrayList_chemist = new ArrayList<>();
 
 
-        arrayList_books=new ArrayList<>();
+        arrayList_books = new ArrayList<>();
 
 
-        arrayList_hotels=new ArrayList<>();
+        arrayList_hotels = new ArrayList<>();
 
 
-        arrayList_pest=new ArrayList<>();
+        arrayList_pest = new ArrayList<>();
         arrayList_pest.add("Pest Control");
         arrayList_pest.add("Ant Control");
         arrayList_pest.add("Cockroach Control");
@@ -336,7 +339,7 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_pest.add("Wasp & Bee Control");
 
 
-        arrayList_pack=new ArrayList<>();
+        arrayList_pack = new ArrayList<>();
         arrayList_pack.add("Local");
         arrayList_pack.add("National");
         arrayList_pack.add("International");
@@ -344,7 +347,7 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_pack.add("Transporters");
 
 
-        arrayList_furniture=new ArrayList<>();
+        arrayList_furniture = new ArrayList<>();
         arrayList_furniture.add("Furniture & Fixture");
         arrayList_furniture.add("Steel Fabrication Works");
         arrayList_furniture.add("Furniture Showrooms");
@@ -359,189 +362,162 @@ public class Submit_Listing extends AppCompatActivity {
         arrayList_furniture.add("Plywood Dealers");
 
 
-        arrayList_caterers=new ArrayList<>();
-
+        arrayList_caterers = new ArrayList<>();
 
 
         sp_parent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-                if(position==0)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_restaurants);
+                if (position == 0) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_restaurants);
                 }
 
-                if(position==1)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_doctors);
-                }
-
-                sp_child.setAdapter(arrayAdapter_child);
-
-                if(position==2)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_school);
+                if (position == 1) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_doctors);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==3)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_electronics);
+                if (position == 2) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_school);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==4)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_travels);
+                if (position == 3) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_electronics);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==5)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_repairs);
+                if (position == 4) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_travels);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==6)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_automobile);
+                if (position == 5) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_repairs);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==7)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_real_estate);
+                if (position == 6) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_automobile);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==8)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_wedding);
+                if (position == 7) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_real_estate);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==9)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_care);
+                if (position == 8) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_wedding);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==10)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_job);
+                if (position == 9) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_care);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==11)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_agri);
+                if (position == 10) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_job);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==12)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_astro);
+                if (position == 11) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_agri);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==13)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_bcare);
+                if (position == 12) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_astro);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==14)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_sports);
+                if (position == 13) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_bcare);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==15)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_fit);
+                if (position == 14) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_sports);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==16)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_dneeds);
+                if (position == 15) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_fit);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==17)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_courier);
+                if (position == 16) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_dneeds);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==18)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_civil);
+                if (position == 17) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_courier);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==19)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_chemist);
+                if (position == 18) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_civil);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==20)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_books);
+                if (position == 19) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_chemist);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==21)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_hotels);
+                if (position == 20) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_books);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==22)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_pest);
+                if (position == 21) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_hotels);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==23)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_pack);
+                if (position == 22) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_pest);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==24)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_furniture);
+                if (position == 23) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_pack);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
 
-                if(position==25)
-                {
-                    arrayAdapter_child=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_caterers);
+                if (position == 24) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_furniture);
+                }
+
+                sp_child.setAdapter(arrayAdapter_child);
+
+                if (position == 25) {
+                    arrayAdapter_child = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_caterers);
                 }
 
                 sp_child.setAdapter(arrayAdapter_child);
@@ -560,24 +536,44 @@ public class Submit_Listing extends AppCompatActivity {
         //============= Child Spinner Process End ===============================================
 
         //============= City Spinner Starts ============================================================
-        arrayList_city=new ArrayList<>();
+        arrayList_city = new ArrayList<>();
         arrayList_city.add("Nagpur");
         arrayList_city.add("Raipur");
         arrayList_city.add("Nashik");
 
-        arrayAdapter_city=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,arrayList_city);
+        arrayAdapter_city = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList_city);
         sp_city.setAdapter(arrayAdapter_city);
 
-        //============== On Click Button Start ==========================================================
+        //============== On Click Button Start =====================================================
         // setContentView(R.layout.activity_submit_listing);
 
-        button_submit = (Button) findViewById(R.id.button_submit);
-        button_submit.setOnClickListener(new View.OnClickListener() {
+        bt_submit = (Button) findViewById(R.id.button_submit);
+        bt_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Submit_Listing.this, More_Details.class);
-                startActivity(intent);
 
+
+                //============= For Validation =============================================================
+
+                String title = ed_title.getText().toString();
+                String owner = ed_owner.getText().toString();
+                String email = ed_email.getText().toString();
+                String password = ed_pass.getText().toString();
+                String address = ed_address.getText().toString();
+                String pin = ed_pin.getText().toString();
+                String mob = ed_mob.getText().toString();
+                String phone = ed_phone.getText().toString();
+
+                //========== Make Functions of Validation and Pass all Parameters ======================
+
+                boolean check= validationInfo(title, owner, email, password, address, pin, mob, phone);
+
+                if (check==true){
+                    Toast.makeText(getApplicationContext(),"Details Submitted",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Submit_Listing.this, More_Details.class);
+                    startActivity(intent);
+                }else
+                    Toast.makeText(getApplicationContext(),"Enter All Details",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -585,4 +581,74 @@ public class Submit_Listing extends AppCompatActivity {
 
     }
 
+    private boolean validationInfo(String title, String owner, String email, String password, String address, String pin, String mob, String phone) {
+        if (title.length() == 0) {
+            ed_title.requestFocus();
+            ed_title.setError("Need to Enter Business/Company Title");
+            return false;
+        } else if (!title.matches("[a-zA-Z]+")) {
+            ed_title.requestFocus();
+            ed_title.setError("Enter Only Alphabetical Characters");
+            return false;
+        }
+
+        else if (owner.length() == 0) {
+            ed_owner.requestFocus();
+            ed_owner.setError("Need to Enter Owner's Name");
+            return false;
+        }/* else if (!owner.matches("[a-zA-Z]+")) {
+   ed_owner.requestFocus();
+   ed_owner.setError("Enter Only Alphabetical Characters");
+   return false;
+  } */
+
+        else if (email.length() == 0) {
+            ed_email.requestFocus();
+            ed_email.setError("Email ID is Mandatory");
+            return false;
+        } else if (!email.matches("[a-zA-z0-9._-]+@[a-z]+\\.+[a-z]+")) {
+            ed_email.requestFocus();
+            ed_email.setError("Enter Valid Email ID");
+            return false;
+        }
+
+        else if (password.length()<=5) {
+            ed_pass.requestFocus();
+            ed_pass.setError("Minimum 6 Characters Required");
+            return false;
+        } else if (!password.matches("[a-zA-z0-9._-]+@")) {
+            ed_pass.requestFocus();
+            ed_pass.setError("Enter Alpha Numeric Password NO Special Symbols, ONLY- @,-,_ ");
+            return false;
+        }
+
+        else if (address.length()==0){
+            ed_address.requestFocus();
+            ed_address.setError("This Field cannot be Empty");
+            return false;
+        }
+
+        else if (pin.length()==0){
+            ed_pin.requestFocus();
+            ed_pin.setError("Enter Correct Pin-code");
+            return false;
+        }
+
+        else if (mob.length() == 0) {
+            ed_mob.requestFocus();
+            ed_mob.setError("Mobile Number is Required");
+            return false;
+        } else if (!mob.matches("^[0-9]{10,13}$")) {
+            ed_mob.requestFocus();
+            ed_mob.setError("Correct Format: +91xxxxxxxxxx");
+            return false;
+        }
+
+        else if (phone.length() == 0) {
+            ed_phone.requestFocus();
+            ed_phone.setError("Company's/Business's Landline Number is Required");
+            return false;
+        }
+        return true;
+    }
 }
